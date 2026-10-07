@@ -46,7 +46,7 @@ const SHAPE = {
   cores: { nome: 's', cor: 'c', ordem: 'n' },
   caixas: { nome: 's', icone: 's', desc: 's', vista: 's', ordem: 'n', fav: 'b', arquivada: 'b', criada: 'n' },
   colunas: { caixa: 's', nome: 's', ordem: 'n', limite: 'n', feito: 'b', fechada: 'b' },
-  blocos: { caixa: 's', coluna: 's', pai: 's', titulo: 's', texto: 't', forma: 's', cor: 's', tags: 's', prazo: 'd', hora: 'h', feito: 'n', prio: 'n', peso: 'n', estrela: 'b', fixo: 'b', hoje: 'd', repete: 's', link: 's', ordem: 'n', criado: 'n', lixo: 'n', arquivado: 'b' },
+  blocos: { caixa: 's', coluna: 's', pai: 's', titulo: 's', texto: 't', forma: 's', cor: 's', tags: 's', prazo: 'd', hora: 'h', feito: 'n', prio: 'n', peso: 'n', estrela: 'b', fixo: 'b', hoje: 'd', repete: 's', link: 's', ordem: 'n', criado: 'n', lixo: 'n', arquivado: 'b', x: 'n', y: 'n' },
   modelos: { nome: 's', tipo: 's', dados: 'T' },
   ajustes: { meta: 'n' },
 };

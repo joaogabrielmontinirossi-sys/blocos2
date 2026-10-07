@@ -306,3 +306,27 @@ Abertas pelo botão **Mais vistas** de qualquer caixa. Todas respeitam os filtro
 **Galeria**
 
 225. Galeria de vistas por categoria, com as três usadas por último sempre à mão na barra da caixa
+
+## Vinte vistas clássicas novas
+
+Ficam junto de Quadro, Lista, Notas, Tabela e Calendário na galeria. Cada uma tem um jeito próprio de trabalhar, não é só outro agrupamento.
+
+226. Tópicos: editor de tópicos: Enter cria, Tab encaixa, Shift+Tab desencaixa
+227. Página: um documento só: cada bloco é uma seção com título e texto editáveis no lugar
+228. Caderno: lista de notas à esquerda, a nota aberta para escrever à direita
+229. Agenda semanal: sete dias por hora, das 6h às 22h. Solte um bloco na hora certa
+230. Quadro com raias: as colunas do quadro cruzadas com as etiquetas, uma raia por cor
+231. Mesa livre: uma mesa sem linhas: arraste cada bloco para onde fizer sentido
+232. Cartões com lista: cada bloco é um cartão com a lista do que tem dentro, para marcar ali mesmo
+233. Abas: uma coluna por vez, em abas no alto. Solte um bloco numa aba para mudar de coluna
+234. Navegador em colunas: colunas lado a lado: a coluna, o bloco, o que há dentro dele e o detalhe
+235. Hábitos: as rotinas da caixa em quatorze dias. Marque o de hoje e veja a sequência
+236. Apresentação: um bloco por tela, em letras grandes. Setas do teclado passam; há tela cheia
+237. Trilha de marcos: uma linha vertical do tempo, com cada prazo como um marco e o “hoje” no meio
+238. Tabela dinâmica: etiquetas nas linhas, colunas nas colunas, e a contagem em cada cruzamento
+239. Formulário: cadastre um bloco completo de uma vez, com todos os campos, e já parta para o próximo
+240. Planner mensal: o mês em linhas, um dia por linha, com um campo para anotar em cada dia
+241. Conversa: os blocos como mensagens, na ordem em que foram criados. Escreva embaixo e envie
+242. Cronograma: dias na horizontal e uma barra por bloco, da criação ao prazo. Solte num dia para remarcar
+243. Estante: cada coluna é uma prateleira e cada bloco, uma lombada. A altura é o peso
+244. Faixas: o quadro deitado: cada coluna vira uma faixa que rola para o lado. Boa no celular

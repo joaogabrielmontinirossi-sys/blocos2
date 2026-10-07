@@ -39,7 +39,7 @@ function vCaixa() {
        <button data-act="arquivarCaixa" data-id="${cx.id}">Arquivar a caixa</button><button class="danger" data-act="delCaixa" data-id="${cx.id}">Excluir a caixa</button>`}</div></details>`)
     + `<input class="desc" data-store="caixas" data-id="${cx.id}" data-f="desc" value="${esc(cx.desc)}" placeholder="Para que serve esta caixa? (opcional)" aria-label="Descrição da caixa" maxlength="300">
     <div class="tprog" data-fx="torre">${torre(todos)}<span class="muted sm">${feitos.length} de ${plural(todos.length, 'bloco', 'blocos')} · peso ${somaPeso(feitos)}/${somaPeso(todos)}</span></div>
-    <div class="tools"><div class="seg">${VISTAS.concat([...new Set([cx.vista].concat(S.set.rec || []))].filter(v => MV[v]).slice(0, 3).map(v => [v, MV[v][0]])).map(([v, n]) => `<button data-act="vista" data-v="${v}" class="${cx.vista === v ? 'on' : ''}">${n}</button>`).join('')}</div><button class="btn sm" data-act="maisVistas">Mais vistas (${Object.keys(MV).length})</button>
+    <div class="tools"><div class="seg">${VISTAS.concat([...new Set([cx.vista].concat(S.set.rec || []))].filter(v => MV[v] || CV[v]).slice(0, 3).map(v => [v, (MV[v] || CV[v])[0]])).map(([v, n]) => `<button data-act="vista" data-v="${v}" class="${cx.vista === v ? 'on' : ''}">${n}</button>`).join('')}</div><button class="btn sm" data-act="maisVistas">Mais vistas (${Object.keys(MV).length + Object.keys(CV).length})</button>
       <input type="search" data-uf="txt" value="${esc(f.txt)}" placeholder="Filtrar nesta caixa…" aria-label="Filtrar">
       <select data-uf="cor" aria-label="Etiqueta"><option value="">Toda etiqueta</option>${cores().map(c => `<option value="${c.id}" ${f.cor === c.id ? 'selected' : ''}>${esc(c.nome)}</option>`).join('')}</select>
       <select data-uf="prazo" aria-label="Prazo">${[['', 'Todo prazo'], ['atrasado', 'Atrasados'], ['hoje', 'Para hoje'], ['semana', 'Próximos 7 dias'], ['sem', 'Sem prazo']].map(([v, n]) => `<option value="${v}" ${f.prazo === v ? 'selected' : ''}>${n}</option>`).join('')}</select>
@@ -51,7 +51,7 @@ function vCaixa() {
 }
 function vVista(cx) {
   const l = raizes(cx.id).filter(passa);
-  return ({ quadro: vQuadro, lista: vLista, notas: vNotas, tabela: vTabela, cal: (c, x) => vCal(x, c.id) }[cx.vista] || (MV[cx.vista] && MV[cx.vista][3]) || vQuadro)(cx, l);
+  return ({ quadro: vQuadro, lista: vLista, notas: vNotas, tabela: vTabela, cal: (c, x) => vCal(x, c.id) }[cx.vista] || (MV[cx.vista] && MV[cx.vista][3]) || (CV[cx.vista] && CV[cx.vista][2]) || vQuadro)(cx, l);
 }
 
 /* ---------- Quadro (estilo Trello) ---------- */

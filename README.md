@@ -38,7 +38,9 @@ Cada caixa pode ser vista de cinco jeitos, e lembra o último:
 - **Tabela**: uma linha por bloco, com coluna, etiqueta, prazo, prioridade e peso editáveis e ordenáveis.
 - **Calendário**: o mês, com blocos para arrastar entre os dias.
 
-O botão **Mais vistas** abre outras 50, em nove grupos: quadros por etiqueta, prioridade, peso, prazo, semana, estado e rotina; matriz de Eisenhower e matriz peso × prioridade; agenda, linha do dia, árvore de encaixes, folha para imprimir; foco, triagem, cartões de estudo e sorteio; leitura contínua, galeria, mural e nuvem de etiquetas; semana em grade, ano inteiro, linha do tempo e contagem regressiva; rosca, funil, criados × concluídos e histograma de prazos; torre, muro, planta baixa e pilhas; mapa mental e tabela de encaixes. Nas vistas com colunas ou quadros, arrastar um bloco muda a propriedade correspondente.
+Há mais vinte vistas clássicas, cada uma com um jeito próprio de trabalhar: **Tópicos** (editor de tópicos com Enter, Tab e Shift+Tab), **Página**, **Caderno**, **Agenda semanal** por hora, **Quadro com raias**, **Mesa livre** (posicione os blocos onde quiser), **Diário**, **Cartões com lista**, **Abas**, **Navegador em colunas**, **Hábitos**, **Apresentação**, **Trilha de marcos**, **Tabela dinâmica**, **Formulário**, **Planner mensal**, **Conversa**, **Cronograma**, **Estante** e **Faixas**.
+
+O botão **Mais vistas** abre também outras 50 derivadas, em nove grupos: quadros por etiqueta, prioridade, peso, prazo, semana, estado e rotina; matriz de Eisenhower e matriz peso × prioridade; agenda, linha do dia, árvore de encaixes, folha para imprimir; foco, triagem, cartões de estudo e sorteio; leitura contínua, galeria, mural e nuvem de etiquetas; semana em grade, ano inteiro, linha do tempo e contagem regressiva; rosca, funil, criados × concluídos e histograma de prazos; torre, muro, planta baixa e pilhas; mapa mental e tabela de encaixes. Nas vistas com colunas ou quadros, arrastar um bloco muda a propriedade correspondente.
 
 Fora das caixas há **Hoje** (o que vence hoje e o que você pôs no dia), **Próximos**, **Estrelas**, **Buscar**, **Painel**, **Arquivo** e **Lixeira**.
 

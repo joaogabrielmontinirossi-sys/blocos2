@@ -92,7 +92,7 @@ const MV = {
 };
 
 // soltar um bloco numa área das vistas novas: cada vista muda uma propriedade diferente
-function gdrop(b, modo, col) {
+function gdrop(b, modo, col, e, z) {
   const t = today();
   if (modo === 'etiqueta') b.cor = col;
   else if (modo === 'prio') b.prio = +col;
@@ -108,6 +108,7 @@ function gdrop(b, modo, col) {
   else if (modo === 'esf') { const [pr, p] = col.split('-'); b.prio = +pr; b.peso = +p; }
   else if (modo === 'periodo') { const [d, h] = col.split('|'); b.prazo = d; if (!h) b.hora = ''; else if (periodo(b) !== h) b.hora = h; }
   else if (modo === 'hora') { const [d, h] = col.split('|'); b.prazo = d; b.hora = h; }
+  else if (GX[modo]) { if (GX[modo](b, col, e, z) === false) return; }
   else return toast('Esta vista é só para olhar: aqui não dá para soltar.');
   Data.put('blocos', b); FX.mark(b.id, 'pop');
 }
@@ -115,8 +116,8 @@ function gdrop(b, modo, col) {
 const CATS = ['Quadros', 'Matrizes', 'Listas', 'Um por vez', 'Notas', 'Tempo', 'Análise', 'Peças', 'Estrutura'];
 function sheetVistas() {
   const cx = byId(S.caixas, U.caixa), bt = (id, n, d) => `<button class="vz${cx.vista === id ? ' on' : ''}" data-act="vista" data-v="${id}"><b>${n}</b><small>${d}</small></button>`;
-  sheet(`<div class="shead"><b>Vistas da caixa</b><span class="muted sm">${Object.keys(MV).length + VISTAS.length} jeitos de olhar os mesmos blocos</span><span class="grow"></span><button class="ib" data-act="fechar" aria-label="Fechar">✕</button></div>
-    <h4>Clássicas</h4><div class="vzs">${bt('quadro', 'Quadro', 'Colunas para arrastar.')}${bt('lista', 'Lista', 'Tarefas com círculo de concluir.')}${bt('notas', 'Notas', 'Grade com a prévia do texto.')}${bt('tabela', 'Tabela', 'Uma linha por bloco.')}${bt('cal', 'Calendário', 'O mês inteiro.')}</div>
+  sheet(`<div class="shead"><b>Vistas da caixa</b><span class="muted sm">${Object.keys(MV).length + Object.keys(CV).length + VISTAS.length} jeitos de olhar os mesmos blocos</span><span class="grow"></span><button class="ib" data-act="fechar" aria-label="Fechar">✕</button></div>
+    <h4>Clássicas</h4><div class="vzs">${bt('quadro', 'Quadro', 'Colunas para arrastar.')}${bt('lista', 'Lista', 'Tarefas com círculo de concluir.')}${bt('notas', 'Notas', 'Grade com a prévia do texto.')}${bt('tabela', 'Tabela', 'Uma linha por bloco.')}${bt('cal', 'Calendário', 'O mês inteiro.')}${Object.entries(CV).map(([id, v]) => bt(id, v[0], v[1])).join('')}</div>
     ${CATS.map(c => `<h4>${c}</h4><div class="vzs">${Object.entries(MV).filter(([, v]) => v[1] === c).map(([id, v]) => bt(id, v[0], v[2])).join('')}</div>`).join('')}`, 'card');
 }
 // ações das vistas novas; entram no mapa de ações do app
@@ -124,8 +125,8 @@ const A2 = {
   maisVistas() { sheetVistas(); },
   vista(el) {
     const c = byId(S.caixas, U.caixa), v = el.dataset.v; c.vista = v; Data.put('caixas', c);
-    if (MV[v]) { S.set.rec = [v].concat((S.set.rec || []).filter(x => x !== v)).slice(0, 3); DB.saveSet(); }
-    U.pulo = U.fi = 0; U.fv = false; closeSheet(); draw();
+    if (MV[v] || CV[v]) { S.set.rec = [v].concat((S.set.rec || []).filter(x => x !== v)).slice(0, 3); DB.saveSet(); }
+    U.pulo = U.fi = U.slide = 0; U.fv = false; closeSheet(); draw();
   },
   um(el) { const d = el.dataset; U[d.k] = (U[d.k] || 0) + +d.n; if (d.z) U[d.z] = false; draw(); },
   virarF() { U.fv = !U.fv; draw(); FX.play($('.um.flash'), 'flip'); },

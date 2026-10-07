@@ -510,11 +510,11 @@ async function busy(el, f) { el.disabled = true; try { await f(); } catch (e) { 
 const FORMS = {
   captura(f) {
     const d = f.dataset, txt = f.q.value; if (!txt.trim()) return;
-    const col = d.col && byId(S.colunas, d.col), l = capturar(txt, { caixa: d.caixa || (col ? col.caixa : d.global || d.hoje ? 'entrada' : U.caixa), coluna: d.col, pai: d.pai, hoje: !!d.hoje });
+    const col = d.col && byId(S.colunas, d.col), l = capturar(txt, { caixa: d.caixa || (col ? col.caixa : d.global || d.hoje ? 'entrada' : U.caixa), coluna: d.col, pai: d.pai, hoje: !!d.hoje, prazo: d.prazo });
     if (!l.length) return;
     if (d.pai) U.abertos.add(d.pai);
     refresh();
-    const sel = d.pai ? `form[data-pai="${d.pai}"] input` : d.col ? `form[data-col="${d.col}"] input` : d.hoje ? 'form[data-hoje] input' : d.global ? '#side .cap input' : 'form[data-caixa] input';
+    const sel = d.pai ? `form[data-pai="${d.pai}"] input` : d.col ? `form[data-col="${d.col}"] input` : d.hoje ? 'form[data-hoje] input' : d.global ? '#side .cap input' : d.prazo ? `form[data-prazo="${d.prazo}"] input` : 'form[data-caixa] input';
     const i = (document.body.classList.contains('sheet') && $('#sheet ' + sel)) || $(sel); if (i) i.focus();
     if (d.global) { const b = l[0], c = caixaDe(b); toast(`Capturado em ${c.nome}${b.prazo ? ' para ' + fmtDia(b.prazo).toLowerCase() : ''}.`); }
   },
@@ -536,6 +536,7 @@ const FORMS = {
     DB.changed(); closeSheet(); draw(); toast(`${plural(n, 'bloco criado', 'blocos criados')}.`);
   },
 };
+Object.assign(FORMS, F2);
 
 /* ---------- eventos ---------- */
 document.addEventListener('click', e => {
@@ -604,7 +605,7 @@ document.addEventListener('drop', e => {
   e.preventDefault();
   const b = byId(S.blocos, e.dataTransfer.getData('text/plain')), k = z.dataset.drop; if (!b) return;
   if (k === 'col') { const sobre = e.target.closest('.bk'); moverColuna(b, z.dataset.col, sobre && sobre.dataset.id !== b.id ? sobre.dataset.id : ''); }
-  else if (k === 'g') gdrop(b, z.dataset.modo, z.dataset.col);
+  else if (k === 'g') gdrop(b, z.dataset.modo, z.dataset.col, e, z);
   else if (k === 'dia') { b.prazo = z.dataset.dia; Data.put('blocos', b); FX.mark(b.id, 'pop'); }
   else if (k === 'caixa') { if (b.caixa !== z.dataset.id || b.pai) { moverCaixa(b, z.dataset.id); DB.changed(); toast(`Movido para ${byId(S.caixas, z.dataset.id).nome}.`); } }
   else if (k === 'hoje') { b.hoje = today(); Data.put('blocos', b); toast('Está no seu dia de hoje.'); }
