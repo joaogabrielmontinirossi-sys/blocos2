@@ -307,6 +307,9 @@ function draw() {
     <select data-sel="cor" aria-label="Etiquetar"><option value="">Etiquetar…</option>${cores().map(c => `<option value="${c.id}">${esc(c.nome)}</option>`).join('')}</select>
     <button class="btn sm" data-act="selFazer" data-k="arquivar">Arquivar</button><button class="btn sm danger" data-act="selFazer" data-k="lixo">Lixeira</button><button class="btn sm" data-act="selModo">Cancelar</button>` : '';
   b.classList.toggle('selecao', !!U.sel);
+  // só no celular: a doca de destinos (aparece enquanto se arrasta) e a barra de baixo
+  $('#doca').innerHTML = `<span data-drop="hoje">☀ Hoje</span>${caixas().filter(c => c.id !== U.caixa || U.v !== 'caixa').map(c => `<span data-drop="caixa" data-id="${c.id}">${esc(c.icone) || '▪'} ${esc(c.nome)}</span>`).join('')}<span data-drop="lixo" class="lx">✕ Lixeira</span>`;
+  $('#rodape').innerHTML = `<button data-act="ir" data-v="hoje" class="${U.v === 'hoje' ? 'on' : ''}"><i>☀</i>Hoje</button><button data-act="irCaixa" data-id="entrada" class="${U.v === 'caixa' && U.caixa === 'entrada' ? 'on' : ''}"><i>▤</i>Entrada</button><button data-act="capMovel" class="mais" aria-label="Capturar um bloco"><i>＋</i></button><button data-act="ir" data-v="busca" class="${U.v === 'busca' ? 'on' : ''}"><i>⌕</i>Buscar</button><button data-act="side"><i>☰</i>Caixas</button>`;
   const hj = doDia().length; document.title = (hj ? `(${hj}) ` : '') + 'Blocos 2';
   FX.flush();
 }
@@ -382,7 +385,7 @@ function sheetAjuda() {
   sheet(`<div class="shead"><b>Manual do Blocos 2</b><span class="grow"></span><button class="ib" data-act="fechar" aria-label="Fechar">✕</button></div>
     <ol class="sm"><li><b>Caixas</b> guardam blocos. Cada caixa pode ser vista como Quadro, Lista, Notas, Tabela ou Calendário.</li><li><b>Blocos</b> são tarefas ou notas. A cor é a etiqueta; o número de pinos é o peso.</li><li><b>Encaixe:</b> um bloco pode ter blocos dentro. O de fora mostra o progresso dos de dentro.</li><li><b>Entrada</b> recebe o que você captura sem pensar; depois é só arrastar para a caixa certa.</li></ol>
     <h3>Captura rápida</h3><p class="muted sm"><code>hoje</code>, <code>amanhã</code>, <code>sex</code>, <code>25/12</code> definem o prazo; <code>às 14h</code> a hora; <code>#etiqueta</code> a cor (ou uma etiqueta livre); <code>@caixa</code> o destino; <code>!</code> a <code>!!!</code> a prioridade; <code>*</code> a estrela. Várias linhas coladas viram vários blocos.</p>
-    <h3>Arrastar</h3><p class="muted sm">Entre colunas, para um dia do calendário, para uma caixa da barra lateral, para Hoje ou para a Lixeira.</p>
+    <h3>Arrastar</h3><p class="muted sm">No celular, segure o bloco por um instante e leve até o destino; uma faixa no alto mostra Hoje, as caixas e a Lixeira. Entre colunas, para um dia do calendário, para uma caixa da barra lateral, para Hoje ou para a Lixeira.</p>
     <h3>Atalhos</h3><dl class="io"><dt>N</dt><dd>Capturar</dd><dt>/</dt><dd>Buscar</dd><dt>1 a 5</dt><dd>Hoje, Próximos, Estrelas, Entrada, Painel</dd><dt>Q L T B C</dt><dd>Quadro, Lista, Tabela, Notas (bloco de notas), Calendário</dd><dt>?</dt><dd>Este manual</dd><dt>Esc</dt><dd>Fechar</dd></dl>`);
 }
 
@@ -393,6 +396,8 @@ function modeloDeCaixa(cx) { const cols = colsDe(cx.id); return { icone: cx.icon
 
 const A = {
   side() { document.body.classList.toggle('lado'); },
+  filtros() { U.filt = !U.filt; draw(); },
+  capMovel() { sheet(`<div class="shead"><b>Capturar um bloco</b><span class="grow"></span><button class="ib" data-act="fechar" aria-label="Fechar">✕</button></div>${capForm('data-global="1" data-fecha="1"', 'Pagar boleto sexta #urgente')}<p class="muted sm hint">Vai para a Entrada, ou use <code>@caixa</code>. Também valem <code>hoje</code>, <code>amanhã</code>, <code>25/12</code>, <code>às 14h</code>, <code>#etiqueta</code>, <code>!</code> e <code>*</code>.</p>`); const i = $('#sheet .cap input'); if (i) i.focus(); },
   ir(el) { ir(el.dataset.v); },
   irCaixa(el) { ir('caixa', el.dataset.id); },
   desfazer() { const f = desfazer; desfazer = null; $('#toast').classList.remove('on'); if (f) f(); },
@@ -513,6 +518,7 @@ const FORMS = {
     const col = d.col && byId(S.colunas, d.col), l = capturar(txt, { caixa: d.caixa || (col ? col.caixa : d.global || d.hoje ? 'entrada' : U.caixa), coluna: d.col, pai: d.pai, hoje: !!d.hoje, prazo: d.prazo });
     if (!l.length) return;
     if (d.pai) U.abertos.add(d.pai);
+    if (d.fecha) closeSheet();
     refresh();
     const sel = d.pai ? `form[data-pai="${d.pai}"] input` : d.col ? `form[data-col="${d.col}"] input` : d.hoje ? 'form[data-hoje] input' : d.global ? '#side .cap input' : d.prazo ? `form[data-prazo="${d.prazo}"] input` : 'form[data-caixa] input';
     const i = (document.body.classList.contains('sheet') && $('#sheet ' + sel)) || $(sel); if (i) i.focus();
@@ -600,17 +606,20 @@ document.addEventListener('dragstart', e => { const b = e.target.closest && e.ta
 document.addEventListener('dragend', () => { document.body.classList.remove('drag'); document.querySelectorAll('.over,.pego').forEach(x => x.classList.remove('over', 'pego')); });
 document.addEventListener('dragover', e => { const z = e.target.closest('[data-drop]'); if (!z) return; e.preventDefault(); z.classList.add('over'); });
 document.addEventListener('dragleave', e => { const z = e.target.closest('[data-drop]'); if (z && !z.contains(e.relatedTarget)) z.classList.remove('over'); });
-document.addEventListener('drop', e => {
-  const z = e.target.closest('[data-drop]'); if (!z) return;
-  e.preventDefault();
-  const b = byId(S.blocos, e.dataTransfer.getData('text/plain')), k = z.dataset.drop; if (!b) return;
-  if (k === 'col') { const sobre = e.target.closest('.bk'); moverColuna(b, z.dataset.col, sobre && sobre.dataset.id !== b.id ? sobre.dataset.id : ''); }
+// soltar um bloco numa área: vale para o mouse (drop) e para o dedo (toque.js)
+function soltar(id, z, alvo, e) {
+  const b = byId(S.blocos, id), k = z.dataset.drop; if (!b) return;
+  if (k === 'col') { const sobre = alvo && alvo.closest && alvo.closest('.bk'); moverColuna(b, z.dataset.col, sobre && sobre.dataset.id !== b.id ? sobre.dataset.id : ''); }
   else if (k === 'g') gdrop(b, z.dataset.modo, z.dataset.col, e, z);
   else if (k === 'dia') { b.prazo = z.dataset.dia; Data.put('blocos', b); FX.mark(b.id, 'pop'); }
   else if (k === 'caixa') { if (b.caixa !== z.dataset.id || b.pai) { moverCaixa(b, z.dataset.id); DB.changed(); toast(`Movido para ${byId(S.caixas, z.dataset.id).nome}.`); } }
   else if (k === 'hoje') { b.hoje = today(); Data.put('blocos', b); toast('Está no seu dia de hoje.'); }
   else if (k === 'lixo') return A.lixo({ dataset: { id: b.id } });
   draw();
+}
+document.addEventListener('drop', e => {
+  const z = e.target.closest('[data-drop]'); if (!z) return;
+  e.preventDefault(); soltar(e.dataTransfer.getData('text/plain'), z, e.target, e);
 });
 addEventListener('beforeinstallprompt', e => { e.preventDefault(); inst = e; if (U.v === 'ajustes') draw(); });
 

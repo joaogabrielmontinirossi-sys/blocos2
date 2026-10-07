@@ -331,3 +331,13 @@ Ficam junto de Quadro, Lista, Notas, Tabela e Calendário na galeria. Cada uma t
 243. Estante: cada coluna é uma prateleira e cada bloco, uma lombada. A altura é o peso
 244. Faixas: o quadro deitado: cada coluna vira uma faixa que rola para o lado. Boa no celular
 245. Diário: escreva uma entrada e ela entra na data de hoje; as antigas ficam abaixo, dia por dia
+
+## No celular
+
+246. Arrastar com o dedo: segure o bloco por um instante e leve até o destino
+247. Doca de destinos no alto enquanto se arrasta: Hoje, as caixas e a Lixeira
+248. Rolagem automática ao levar o bloco para a borda da tela ou da área
+249. Barra inferior com Hoje, Entrada, captura, Buscar e Caixas
+250. Captura rápida em uma folha, pelo botão central
+251. Filtros recolhidos num botão, para sobrar tela
+252. Alvos de toque maiores e as 75 vistas ajustadas à largura do celular

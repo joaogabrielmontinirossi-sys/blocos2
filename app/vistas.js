@@ -40,13 +40,13 @@ function vCaixa() {
     + `<input class="desc" data-store="caixas" data-id="${cx.id}" data-f="desc" value="${esc(cx.desc)}" placeholder="Para que serve esta caixa? (opcional)" aria-label="Descrição da caixa" maxlength="300">
     <div class="tprog" data-fx="torre">${torre(todos)}<span class="muted sm">${feitos.length} de ${plural(todos.length, 'bloco', 'blocos')} · peso ${somaPeso(feitos)}/${somaPeso(todos)}</span></div>
     <div class="tools"><div class="seg">${VISTAS.concat([...new Set([cx.vista].concat(S.set.rec || []))].filter(v => MV[v] || CV[v]).slice(0, 3).map(v => [v, (MV[v] || CV[v])[0]])).map(([v, n]) => `<button data-act="vista" data-v="${v}" class="${cx.vista === v ? 'on' : ''}">${n}</button>`).join('')}</div><button class="btn sm" data-act="maisVistas">Mais vistas (${Object.keys(MV).length + Object.keys(CV).length})</button>
-      <input type="search" data-uf="txt" value="${esc(f.txt)}" placeholder="Filtrar nesta caixa…" aria-label="Filtrar">
+      <button class="btn sm bfil${filtrando ? ' pri' : ''}" data-act="filtros">Filtros${filtrando ? ' •' : ''}</button><div class="filtros${U.filt ? ' ab' : ''}"><input type="search" data-uf="txt" value="${esc(f.txt)}" placeholder="Filtrar nesta caixa…" aria-label="Filtrar">
       <select data-uf="cor" aria-label="Etiqueta"><option value="">Toda etiqueta</option>${cores().map(c => `<option value="${c.id}" ${f.cor === c.id ? 'selected' : ''}>${esc(c.nome)}</option>`).join('')}</select>
       <select data-uf="prazo" aria-label="Prazo">${[['', 'Todo prazo'], ['atrasado', 'Atrasados'], ['hoje', 'Para hoje'], ['semana', 'Próximos 7 dias'], ['sem', 'Sem prazo']].map(([v, n]) => `<option value="${v}" ${f.prazo === v ? 'selected' : ''}>${n}</option>`).join('')}</select>
       <select data-uf="prio" aria-label="Prioridade">${[['', 'Toda prioridade'], ['1', '! ou mais'], ['2', '!! ou mais'], ['3', 'Só !!!']].map(([v, n]) => `<option value="${v}" ${f.prio === v ? 'selected' : ''}>${n}</option>`).join('')}</select>
       <label class="tog"><input type="checkbox" data-uf="feitos" ${f.feitos ? 'checked' : ''}><span>Concluídos</span></label>
       ${filtrando ? `<button class="btn sm" data-act="limparFiltro">Limpar filtro</button>` : ''}
-      <button class="btn sm ${U.sel ? 'pri' : ''}" data-act="selModo">${U.sel ? 'Sair da seleção' : 'Selecionar'}</button></div>
+      </div><button class="btn sm ${U.sel ? 'pri' : ''}" data-act="selModo">${U.sel ? 'Sair da seleção' : 'Selecionar'}</button></div>
     <div id="vista">${vVista(cx)}</div>`;
 }
 function vVista(cx) {
