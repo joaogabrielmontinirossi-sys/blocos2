@@ -330,3 +330,4 @@ Ficam junto de Quadro, Lista, Notas, Tabela e Calendário na galeria. Cada uma t
 242. Cronograma: dias na horizontal e uma barra por bloco, da criação ao prazo. Solte num dia para remarcar
 243. Estante: cada coluna é uma prateleira e cada bloco, uma lombada. A altura é o peso
 244. Faixas: o quadro deitado: cada coluna vira uma faixa que rola para o lado. Boa no celular
+245. Diário: escreva uma entrada e ela entra na data de hoje; as antigas ficam abaixo, dia por dia
