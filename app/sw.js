@@ -1,6 +1,6 @@
 /* Blocos 2 — service worker da versão web: guarda o app para abrir sem internet. */
-const VERSION = 'blocos2-1.0.0';
-const FILES = ['./', 'index.html', 'app.css', 'store.js', 'sync.js', 'fx.js', 'vistas.js', 'app.js', 'logo.svg', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png'];
+const VERSION = 'blocos2-1.1.0';
+const FILES = ['./', 'index.html', 'app.css', 'store.js', 'sync.js', 'fx.js', 'vistas.js', 'mais.js', 'app.js', 'logo.svg', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

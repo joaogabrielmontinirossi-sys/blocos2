@@ -504,6 +504,7 @@ const A = {
   },
   gOff() { Sync.disconnect(); draw(); },
 };
+Object.assign(A, A2);
 async function busy(el, f) { el.disabled = true; try { await f(); } catch (e) { toast(e.message || 'Não deu certo.'); } draw(); }
 
 const FORMS = {
@@ -582,6 +583,7 @@ document.addEventListener('change', e => {
     b.texto = b.texto.split('\n').map(l => { if (/^\s*(?:[-*]\s+)?\[( |x|X)\]\s+/.test(l) && ++n === +d.mdc) return l.replace(/\[( |x|X)\]/, el.checked ? '[x]' : '[ ]'); return l; }).join('\n');
     Data.put('blocos', b);
   }
+  else if (d.chk) { concluir(d.chk, el.checked); refresh(); }
   else if (d.cfg) { const c = cfg(); c[d.cfg] = Math.max(0, Math.floor(+el.value) || 0); Data.put('ajustes', c); }
   else if (d.uf) { U.f[d.uf] = el.type === 'checkbox' ? el.checked : el.value; draw(); }
   else if (d.u) { U[d.u] = el.value; draw(); }
@@ -602,6 +604,7 @@ document.addEventListener('drop', e => {
   e.preventDefault();
   const b = byId(S.blocos, e.dataTransfer.getData('text/plain')), k = z.dataset.drop; if (!b) return;
   if (k === 'col') { const sobre = e.target.closest('.bk'); moverColuna(b, z.dataset.col, sobre && sobre.dataset.id !== b.id ? sobre.dataset.id : ''); }
+  else if (k === 'g') gdrop(b, z.dataset.modo, z.dataset.col);
   else if (k === 'dia') { b.prazo = z.dataset.dia; Data.put('blocos', b); FX.mark(b.id, 'pop'); }
   else if (k === 'caixa') { if (b.caixa !== z.dataset.id || b.pai) { moverCaixa(b, z.dataset.id); DB.changed(); toast(`Movido para ${byId(S.caixas, z.dataset.id).nome}.`); } }
   else if (k === 'hoje') { b.hoje = today(); Data.put('blocos', b); toast('Está no seu dia de hoje.'); }

@@ -221,3 +221,88 @@
 172. Contador do dia no título da aba
 173. Caixa de exemplo que some ao sincronizar com dados reais
 174. Respeita a preferência de reduzir movimento
+
+## Mais 50 vistas da caixa
+
+Abertas pelo botão **Mais vistas** de qualquer caixa. Todas respeitam os filtros da caixa.
+
+**Quadros**
+
+175. Quadro por etiqueta: uma coluna por cor. Soltar troca a etiqueta
+176. Quadro por prioridade: de alta a nenhuma. Soltar muda a prioridade
+177. Quadro por peso: peças de 1, 2 e 3 pinos lado a lado
+178. Quadro por prazo: atrasado, hoje, amanhã, semana, depois, sem prazo
+179. Semana em colunas: os próximos sete dias, um por coluna
+180. Quadro por estado: abertos, no meu dia e concluídos
+181. Tarefas e notas: duas colunas. Soltar converte o bloco
+182. Quadro por etiqueta livre: uma coluna por #etiqueta que você escreveu
+183. Quadro de rotinas: o que se repete e com que frequência
+184. Quadro de progresso: pelo andamento dos blocos de dentro
+185. Destaques: fixados, com estrela e o resto
+
+**Matrizes**
+
+186. Matriz de Eisenhower: importante × urgente, em quatro quadrantes
+187. Matriz peso × prioridade: acha os ganhos rápidos: muita prioridade, pouco peso
+
+**Listas**
+
+188. Agenda da caixa: em ordem de data, com um cabeçalho por dia
+189. Linha do dia: as horas de hoje, das 6h às 22h
+190. Índice alfabético: de A a Z, pela primeira letra
+191. Pendências: só os atrasados, do mais antigo ao mais recente
+192. O que falta definir: tarefas sem prazo, sem etiqueta ou sem prioridade
+193. Atividade recente: o que mudou por último, do mais novo ao mais antigo
+194. Diário de concluídos: o que foi concluído, dia por dia
+195. Árvore de encaixes: todos os níveis abertos, como um sumário
+196. Folha para imprimir: lista limpa com caixinhas, pronta para o papel
+197. Favoritos: só os blocos que têm link, como uma lista de sites
+
+**Um por vez**
+
+198. Foco: um bloco por vez: só o mais importante na tela. Conclua ou pule
+199. Triagem: decide prazo e etiqueta de um bloco por vez
+200. Cartões de estudo: o título na frente, o texto no verso. Vire para conferir
+201. Sorteio: não sabe por onde começar? Deixe a caixa escolher
+
+**Notas**
+
+202. Leitura contínua: todos os textos em sequência, como um documento
+203. Galeria: cartões grandes com capa na cor da etiqueta
+204. Mural de lembretes: papéis coloridos colados na parede
+205. Sumário das notas: os títulos internos de cada texto, como um índice
+206. Nuvem de etiquetas: as #etiquetas livres, maiores quanto mais usadas
+
+**Tempo**
+
+207. Semana em grade: sete dias por quatro períodos do dia
+208. Ano inteiro: doze meses de uma vez; os dias com prazo ficam marcados
+209. Linha do tempo: uma barra por bloco, de hoje até o prazo (28 dias)
+210. Contagem regressiva: quantos dias faltam para cada prazo, em números grandes
+211. Mapa de calor: dezesseis semanas de blocos concluídos nesta caixa
+
+**Análise**
+
+212. Rosca por etiqueta: a fatia de cada cor entre os blocos abertos
+213. Funil das colunas: quantos blocos há em cada etapa
+214. Criados × concluídos: trinta dias: o que entrou e o que saiu, acumulado
+215. Histograma de prazos: quantos blocos vencem em cada uma das próximas semanas
+216. Balança por etiqueta: peso aberto contra peso concluído, cor por cor
+217. Resumo da caixa: os números da caixa em uma tela
+218. Ritmo da semana: em que dia da semana você mais conclui nesta caixa
+
+**Peças**
+
+219. Torre: uma pilha só: concluídos na base, abertos em contorno no alto
+220. Muro da caixa: todos os blocos como tijolos: cheios os concluídos, vazados os abertos
+221. Planta baixa: as colunas como cômodos, com uma pecinha por bloco
+222. Pilhas por etiqueta: um gráfico de barras feito de peças
+
+**Estrutura**
+
+223. Mapa mental: a caixa no centro, os blocos e o que há dentro deles em ramos
+224. Tabela de encaixes: só os blocos que têm blocos dentro, com o progresso e o próximo passo
+
+**Galeria**
+
+225. Galeria de vistas por categoria, com as três usadas por último sempre à mão na barra da caixa
